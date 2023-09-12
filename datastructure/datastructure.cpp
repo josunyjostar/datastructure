@@ -7,12 +7,13 @@ int main()
 {
     HashTable<const char*,const char*> hashTable;
         
-    hashTable.Add("test1", "김양념");
-    hashTable.Add("test1", "김과자");
-    hashTable.Add("test1", "김달콤");
+    hashTable.Add("test1", "1번");
+    hashTable.Add("test1", "2번");
+    hashTable.Add("test1", "3번");
+    hashTable.Add("test1", "4번");
 
-    hashTable.Print("test1");
-    hashTable.Delete("test1");
+    
+    hashTable.Delete("test1", "3번");
     hashTable.Print("test1");
     std::cout << "Hello World!\n";
 }

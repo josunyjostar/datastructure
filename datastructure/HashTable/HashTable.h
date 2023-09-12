@@ -13,18 +13,18 @@ public:
 	virtual ~HashTable() { this->Clear(true); }
 public:
 	Value& Add(const Key& _key, Value _val);
-	Value Find(const Key& _key);
+	Value Find(const Key& _key, Value _val);
 	void Delete(const Key& _key);
+	void Delete(const Key& _key, Value _val);
 	void Clear(bool _bMemeClaer = false);
 
 	void Print(const Key& _key);
 private:
-	struct Data_Node {
-		const Key	pPrimitiveKey;
+	struct Data_Node {		
 		Value		pData;
 		Data_Node* pNext;
-		Data_Node() :pPrimitiveKey(NULL), pData(NULL), pNext(NULL) {}
-		Data_Node(const Key& _key, const Value& _Value) :pPrimitiveKey(_key), pData(_Value), pNext(NULL) {}
+		Data_Node() : pData(NULL), pNext(NULL) {}
+		Data_Node(const Key& _key, const Value& _Value) : pData(_Value), pNext(NULL) {}
 	};
 
 	struct Hash_Node {
@@ -68,7 +68,7 @@ inline Value& HashTable<Key, Value>::Add(const Key& _key, Value _val)
 }
 
 template<typename Key, typename Value>
-inline Value HashTable<Key, Value>::Find(const Key& _key)
+inline Value HashTable<Key, Value>::Find(const Key& _key, Value _val)
 {
 	int HashIndex = this->Hash_Function(_key);
 	if (m_pHashTable[HashIndex].DataCount) {
@@ -77,7 +77,7 @@ inline Value HashTable<Key, Value>::Find(const Key& _key)
 
 		while (pCurNode->pNext)
 		{
-			if (pCurNode->pPrimitiveKey == _key)
+			if (pCurNode->pData == _val)
 				return pCurNode->pData;
 			pCurNode = pCurNode->pNext;
 		}
@@ -105,6 +105,38 @@ inline void HashTable<Key, Value>::Delete(const Key& _key)
 		}
 	}
 
+}
+
+template<typename Key, typename Value>
+inline void HashTable<Key, Value>::Delete(const Key& _key, Value _val)
+{
+	int HashIndex = this->Hash_Function(_key);
+	if (m_pHashTable[HashIndex].DataCount) {
+
+		Data_Node* preNode = nullptr;
+		Data_Node* pDeleteNode = m_pHashTable[HashIndex].pDataNode;
+		
+		while (pDeleteNode)
+		{
+			if (pDeleteNode->pData == _val) {		
+
+				auto deleteNextNode = pDeleteNode->pNext;				
+				delete pDeleteNode;
+				m_pHashTable[HashIndex].DataCount--;				
+				
+				if (!preNode) {
+					m_pHashTable[HashIndex].pDataNode = deleteNextNode;
+					return;
+				}
+									
+				preNode->pNext = deleteNextNode;				
+				break;
+			}			
+			preNode = pDeleteNode;
+			pDeleteNode = pDeleteNode->pNext;	
+		}
+
+	}
 }
 
 template<typename Key, typename Value>
@@ -150,6 +182,4 @@ inline void HashTable<Key, Value>::Print(const Key& _key)
 			pCurNode = pCurNode->pNext;
 		}
 	}
-
-	return;
 }
