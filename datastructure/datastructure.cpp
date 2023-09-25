@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "./HashTable/HashTable.h"
+#include "./Heap/MyHeap.h"
 
 int main()
 {
@@ -15,9 +16,17 @@ int main()
     //hashTable.Delete("test1", "3번");
     //hashTable.Print("test1");
 
-    const int arr[] = { 1,3,4,5 };
-    for (auto& el : arr) {
-        cout << el << endl;
+    //const int arr[] = { 1,3,4,5 };
+    //for (auto& el : arr) {
+    //    cout << el << endl;
+    //}
+
+    MyHeap<int> h;
+
+    for (auto i : { 2, 8, 5, 3, 2, 1, 9, 3, 7, 2, 4 })
+    {
+        h.Push(i);
+        h.Print();
     }
 
     std::cout << "Hello World!\n";
