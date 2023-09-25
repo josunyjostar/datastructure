@@ -7,14 +7,19 @@ int main()
 {
     HashTable<const char*,const char*> hashTable;
         
-    hashTable.Add("test1", "1번");
-    hashTable.Add("test1", "2번");
-    hashTable.Add("test1", "3번");
-    hashTable.Add("test1", "4번");
+    //hashTable.Add("test1", "1번");
+    //hashTable.Add("test1", "2번");
+    //hashTable.Add("test1", "3번");
+    //hashTable.Add("test1", "4번");
+    //
+    //hashTable.Delete("test1", "3번");
+    //hashTable.Print("test1");
 
-    
-    hashTable.Delete("test1", "3번");
-    hashTable.Print("test1");
+    const int arr[] = { 1,3,4,5 };
+    for (auto& el : arr) {
+        cout << el << endl;
+    }
+
     std::cout << "Hello World!\n";
 }
 

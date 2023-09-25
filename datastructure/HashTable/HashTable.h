@@ -130,7 +130,7 @@ inline void HashTable<Key, Value>::Delete(const Key& _key, Value _val)
 				}
 									
 				preNode->pNext = deleteNextNode;				
-				break;
+				return;
 			}			
 			preNode = pDeleteNode;
 			pDeleteNode = pDeleteNode->pNext;	
