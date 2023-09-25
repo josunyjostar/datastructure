@@ -2,9 +2,9 @@
 #include <iostream>
 
 template<typename T>
-class MyHeap {
+class Heap {
 public:
-	MyHeap(int capa = 12) {
+	Heap(int capa = 12) {
 		capacity = capa;
 		size = 0;
 		heap = new T[capacity + 1];
@@ -25,7 +25,7 @@ public:
 		return heap[1];
 	}
 
-	bool isEmpty() const {
+	bool IsEmpty() const {
 		return size == 0;
 	}
 
@@ -59,6 +59,32 @@ public:
 		}
 
 		heap[current] = item;
+	}
+	
+	void Pop() {
+		if (IsEmpty()) return;
+		
+		using namespace std;
+		cout << "Pop()" << endl;
+
+		const T lastItem = heap[size];
+		size--;
+		
+		int current = 1;
+		int child = 2;
+		while (child <= size) {
+
+			if (child < size && heap[child] < heap[child + 1])
+				child = child + 1;
+
+			if (lastItem >= heap[child]) break;
+
+			heap[current] = heap[child];
+			current = child;
+			child *= 2;
+		}
+
+		heap[current] = lastItem;
 	}
 
 private:
