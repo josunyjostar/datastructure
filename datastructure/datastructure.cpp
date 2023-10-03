@@ -3,10 +3,11 @@ using namespace std;
 
 #include "./HashTable/HashTable.h"
 #include "./Heap/MyHeap.h"
+#include "./List/List.h"
 
 int main()
 {
-    HashTable<const char*,const char*> hashTable;
+    //HashTable<const char*,const char*> hashTable;
         
     //hashTable.Add("test1", "1번");
     //hashTable.Add("test1", "2번");
@@ -21,20 +22,27 @@ int main()
     //    cout << el << endl;
     //}
 
-    Heap<int> h;
+    //Heap<int> h;
 
-    for (auto i : { 2, 8, 5, 3, 2, 1, 9, 3, 7, 2, 4 })
-    {
-        h.Push(i);
-        h.Print();
-    }
+    //for (auto i : { 2, 8, 5, 3, 2, 1, 9, 3, 7, 2, 4 })
+    //{
+    //    h.Push(i);
+    //    h.Print();
+    //}
 
-    while (!h.IsEmpty())
-    {
-        cout << h.Top() << " ";
-        h.Pop();
-        h.Print();
-    }
+    //while (!h.IsEmpty())
+    //{
+    //    cout << h.Top() << " ";
+    //    h.Pop();
+    //    h.Print();
+    //}
+    
+    List<int> list;
+    list.Insert(1);
+    list.Insert(2);
+    list.Insert(3);
+
+    list.Print();
 
     std::cout << "Hello World!\n";
 }
